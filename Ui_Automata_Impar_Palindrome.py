@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets,QtTest
 from Valida_Alfabeto import Valida_Alfabeto
 from Pila import Pila
+import pyttsx3
 
 
 
@@ -122,10 +123,12 @@ class Ui_Automata_Impar_Palindrome(object):
         palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
-        
+        engine = pyttsx3.init()
+        rate = engine.getProperty('rate')
+        engine.setProperty('rate', rate-60)
         estado_actual="q0"
         for caracter in palabra:
-            
+            #(a/#/#a)
             if Pila_Valida.tope()=="#" and caracter=="a":
                 self.Tr10.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
@@ -135,19 +138,18 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.apilar(caracter)
                 QtTest.QTest.qWait(3000) 
                 self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
-
-                
+            #(a/a/aa)   
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
-                QtTest.QTest.qWait(2000)
+                QtTest.QTest.qWait(1000)
                 self.Tr6.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
                 estado_actual="q0"
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("a")
                 Pila_Valida.apilar("a")
-                QtTest.QTest.qWait(2000)
+                QtTest.QTest.qWait(1500)
                 self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
-
+            #(b/a/ab)
             elif Pila_Valida.tope()=="a" and caracter=="b" and estado_actual=="q0":
                 self.Tr8.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
@@ -157,6 +159,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.apilar("b")
                 QtTest.QTest.qWait(3000)
                 self.Tr8.setStyleSheet("color: rgb(0, 0, 0);")
+            #(c/b/b)
             elif Pila_Valida.tope()=="b" and caracter=="c" and estado_actual=="q0":
                 self.Tr11.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
@@ -165,27 +168,83 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.apilar("b")
                 QtTest.QTest.qWait(3000)
                 self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+            #(b/b/λ)
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q1":
+                QtTest.QTest.qWait(1000)
                 self.Tr1.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
                 Pila_Valida.desapilar()
-                QtTest.QTest.qWait(3000)
+                QtTest.QTest.qWait(2000)
                 self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
+            #(a/a/λ)
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q1":
+                QtTest.QTest.qWait(1000)
                 self.Tr4.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
                 Pila_Valida.desapilar()
                 QtTest.QTest.qWait(3000)
                 self.Tr4.setStyleSheet("color: rgb(0, 0, 0);")
+            #(λ/#/#)
             elif Pila_Valida.tope()=="#" and estado_actual=="q1":
                 self.Tr3.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Aceptacion.jpg"))
                 estado_actual="q2"
                 QtTest.QTest.qWait(3000)
                 self.Tr3.setStyleSheet("color: rgb(0, 0, 0);")
+                engine.say("Estado De aceptacion. La palabra es palindrome")
+                engine.runAndWait()
+            #(b/#/#b) 
+            elif Pila_Valida.tope()=="#" and caracter=="b":
+                self.Tr5.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("#")
+                Pila_Valida.apilar("b")
+                QtTest.QTest.qWait(3000) 
+                self.Tr5.setStyleSheet("color: rgb(0, 0, 0);")
+            #(c/#/#)
+            elif Pila_Valida.tope()=="#" and caracter=="c" and estado_actual=="q0":
+                self.Tr12.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                QtTest.QTest.qWait(3000)
+                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+            #b/b/bb
+            elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q0":
+                QtTest.QTest.qWait(1000)
+                self.Tr6.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("b")
+                Pila_Valida.apilar("b")
+                QtTest.QTest.qWait(1500)
+                self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
+            #(c/a/a)
+            elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
+                self.Tr2.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("a")
+                QtTest.QTest.qWait(3000)
+                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+            #(a/b/ba)
+            elif Pila_Valida.tope()=="b" and caracter=="a" and estado_actual=="q0":
+                self.Tr7.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("b")
+                Pila_Valida.apilar("a")
+                QtTest.QTest.qWait(3000)
+                self.Tr7.setStyleSheet("color: rgb(0, 0, 0);")
 
+        
         for i in range(Pila_Valida.tamano()):
             print(Pila_Valida.mostrar()[i])
                 
