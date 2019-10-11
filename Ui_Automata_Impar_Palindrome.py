@@ -7,10 +7,11 @@
 # WARNING! All changes made in this file will be lost!
 
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets,QtTest
 from Valida_Alfabeto import Valida_Alfabeto
 from Pila import Pila
-import time
+
+
 
 
 class Ui_Automata_Impar_Palindrome(object):
@@ -118,7 +119,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Verifica_Lento.clicked.connect(self.Simulador_Automata)
 
     def Simulador_Automata(self):
-        palabra=self.Palabra.text()
+        palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
         
@@ -132,44 +133,62 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("#")
                 Pila_Valida.apilar(caracter)
-                time.sleep(1)
-               
+                QtTest.QTest.qWait(3000) 
+                self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
+
                 
-                
-                
-            elif Pila_Valida.tope()=="a" and caracter=="a":
-                
+            elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
+                QtTest.QTest.qWait(2000)
                 self.Tr6.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
                 estado_actual="q0"
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("a")
                 Pila_Valida.apilar("a")
-    
-         
+                QtTest.QTest.qWait(2000)
+                self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
 
+            elif Pila_Valida.tope()=="a" and caracter=="b" and estado_actual=="q0":
+                self.Tr8.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("a")
+                Pila_Valida.apilar("b")
+                QtTest.QTest.qWait(3000)
+                self.Tr8.setStyleSheet("color: rgb(0, 0, 0);")
+            elif Pila_Valida.tope()=="b" and caracter=="c" and estado_actual=="q0":
+                self.Tr11.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("b")
+                QtTest.QTest.qWait(3000)
+                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+            elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q1":
+                self.Tr1.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                QtTest.QTest.qWait(3000)
+                self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
+            elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q1":
+                self.Tr4.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                QtTest.QTest.qWait(3000)
+                self.Tr4.setStyleSheet("color: rgb(0, 0, 0);")
+            elif Pila_Valida.tope()=="#" and estado_actual=="q1":
+                self.Tr3.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Aceptacion.jpg"))
+                estado_actual="q2"
+                QtTest.QTest.qWait(3000)
+                self.Tr3.setStyleSheet("color: rgb(0, 0, 0);")
+
+        for i in range(Pila_Valida.tamano()):
+            print(Pila_Valida.mostrar()[i])
                 
-
-        
-                
-
-        
-
-            
-            
-            
-
-    
-        
-        
-    
-
-    
-
-        
-        
-        
-
 
 if __name__ == "__main__":
     import sys

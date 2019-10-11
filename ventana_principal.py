@@ -97,12 +97,6 @@ class Ui_MainWindow(object):
         self.ui.label.setText(self.Cadena.text())
         self.ventana.show()
         
-            
-            
-            
-            
-
-
 
 
 if __name__ == "__main__":
