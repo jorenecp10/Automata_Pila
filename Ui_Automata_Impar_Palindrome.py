@@ -22,9 +22,9 @@ class Ui_Automata_Impar_Palindrome(object):
     def setupUi(self, Automata_Impar_Palindrome):
         Automata_Impar_Palindrome.setObjectName("Automata_Impar_Palindrome")
         Automata_Impar_Palindrome.resize(700,500)
-        Automata_Impar_Palindrome.setStyleSheet("background-color: rgb(170, 255, 255);\n"
+        Automata_Impar_Palindrome.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 255, 255);\n"
-"background-color: rgb(236, 236, 236);")
+"background-color: rgb(255, 255, 255);")
         self.Palindrome = QtWidgets.QWidget(Automata_Impar_Palindrome)
         self.Palindrome.setObjectName("Palindrome")
         self.Verifica_Lento = QtWidgets.QPushButton(self.Palindrome)
@@ -80,6 +80,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Palabra = QtWidgets.QLineEdit(self.Palindrome)
         self.Palabra.setGeometry(QtCore.QRect(60, 90, 391, 20))
         self.Palabra.setObjectName("Palabra")
+        #self.Palabra.setDisabled(1)
         self.Titulo_Palabra = QtWidgets.QLabel(self.Palindrome)
         self.Titulo_Palabra.setGeometry(QtCore.QRect(200, 70, 111, 16))
         self.Titulo_Palabra.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";")
@@ -118,9 +119,10 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Tr4.setText(_translate("Automata_Impar_Palindrome", "a/a/ λ"))
         self.Tr3.setText(_translate("Automata_Impar_Palindrome", " λ/#/#"))
         self.Titulo_Palabra.setText(_translate("Automata_Impar_Palindrome", "PALABRA"))
-        self.Verifica_Lento.clicked.connect(self.Simulador_Automata)
+        self.Verifica_Lento.clicked.connect(self.Simulador_Automata_lento)
+        self.Verifica_rapido.clicked.connect(self.Simulador_Automata_rapido)
 
-    def Simulador_Automata(self):
+    def Simulador_Automata_lento(self):
         palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
@@ -128,6 +130,7 @@ class Ui_Automata_Impar_Palindrome(object):
         rate = engine.getProperty('rate')
         engine.setProperty('rate', rate-60)
         estado_actual="q0"
+        bandera=1
         for caracter in palabra:
             #(a/#/#a)
             if Pila_Valida.tope()=="#" and caracter=="a" and estado_actual=="q0":
@@ -141,6 +144,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000) 
                 self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(a/a/aa)   
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
                 QtTest.QTest.qWait(1000)
@@ -154,6 +158,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(1500)
                 self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(b/a/ab)
             elif Pila_Valida.tope()=="a" and caracter=="b" and estado_actual=="q0":
                 self.Tr8.setStyleSheet("color: rgb(11, 143, 38);")
@@ -166,6 +171,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000)
                 self.Tr8.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(c/b/b)
             elif Pila_Valida.tope()=="b" and caracter=="c" and estado_actual=="q0":
                 self.Tr11.setStyleSheet("color: rgb(11, 143, 38);")
@@ -177,6 +183,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000)
                 self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(b/b/λ)
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q1":
                 QtTest.QTest.qWait(1000)
@@ -188,6 +195,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(2000)
                 self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(a/a/λ)
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q1":
                 QtTest.QTest.qWait(1000)
@@ -197,10 +205,11 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.desapilar()
                 engine.say("continúa en estado q1. leyendo una a")
                 engine.runAndWait()
-                QtTest.QTest.qWait(3000)
+                QtTest.QTest.qWait(2000)
                 self.Tr4.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(λ/#/#)
-            elif Pila_Valida.tope()=="#" and estado_actual=="q1":
+            elif Pila_Valida.tope()=="#" and estado_actual=="q1" and bandera==len(palabra):
                 self.Tr3.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Aceptacion.jpg"))
                 estado_actual="q2"
@@ -210,6 +219,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 self.label.setText("SI ES PALINDROME")
                 self.label.setStyleSheet("color: GREEN")
+                bandera=bandera+1
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
                 self.Tr5.setStyleSheet("color: rgb(11, 143, 38);")
@@ -222,16 +232,17 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000) 
                 self.Tr5.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(c/#/#)
             elif Pila_Valida.tope()=="#" and caracter=="c" and estado_actual=="q0":
                 self.Tr12.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
-                Pila_Valida.desapilar()
                 engine.say("pasa al estado q1. leyendo una c")
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000)
                 self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #b/b/bb
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q0":
                 QtTest.QTest.qWait(1000)
@@ -245,6 +256,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(1500)
                 self.Tr9.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(c/a/a)
             elif Pila_Valida.tope()=="a" and caracter=="c" and estado_actual=="q0":
                 self.Tr2.setStyleSheet("color: rgb(11, 143, 38);")
@@ -256,6 +268,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000)
                 self.Tr2.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
             #(a/b/ba)
             elif Pila_Valida.tope()=="b" and caracter=="a" and estado_actual=="q0":
                 self.Tr7.setStyleSheet("color: rgb(11, 143, 38);")
@@ -268,18 +281,177 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 QtTest.QTest.qWait(3000)
                 self.Tr7.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            else:
+                engine.say("Se quedó sin camino y no finalizó en un estado de aceptacion")
+                engine.runAndWait()
+                msg=QtWidgets.QMessageBox()
+                msg.setText("se quedó sin camino")
+                msg.setStyleSheet("color: red")
+                msg.show()
+                msg.exec()
+                break
+
         if estado_actual != "q2":
-            engine.say("No finalizó en un estado de aceptacion.por lo tanto No es palindrome")
+            engine.say("No es palindrome")
             engine.runAndWait()
             self.label.setText("NO ES PALINDROME")
             self.label.setStyleSheet("color: red")
             msg=QtWidgets.QMessageBox()
+            msg.setText("debe ser de la forma: ZcZ^(-1), Z=(a*,b*)")
             msg.setStyleSheet("color: red")
-            msg.setText("debe ser de la forma: ZcZ^(-1)")
             msg.show()
             msg.exec()
+            self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
+    def Simulador_Automata_rapido(self):
+        palabra=self.Palabra.text()+"#"
+        Pila_Valida=Pila()
+        Pila_Valida.apilar("#")
+        engine = pyttsx3.init()
+        rate = engine.getProperty('rate')
+        engine.setProperty('rate', rate-60)
+        estado_actual="q0"
+        bandera=1
+        for caracter in palabra:
+            #(a/#/#a)
+            if Pila_Valida.tope()=="#" and caracter=="a" and estado_actual=="q0":
+                self.Tr10.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("#")
+                Pila_Valida.apilar(caracter)
+                self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(a/a/aa)   
+            elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
+                self.Tr6.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("a")
+                Pila_Valida.apilar("a")
+                self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(b/a/ab)
+            elif Pila_Valida.tope()=="a" and caracter=="b" and estado_actual=="q0":
+                self.Tr8.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("a")
+                Pila_Valida.apilar("b")
+                self.Tr8.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(c/b/b)
+            elif Pila_Valida.tope()=="b" and caracter=="c" and estado_actual=="q0":
+                self.Tr11.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("b")
+                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(b/b/λ)
+            elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q1":
+                QtTest.QTest.qWait(1000)
+                self.Tr1.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(a/a/λ)
+            elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q1":
+                QtTest.QTest.qWait(1000)
+                self.Tr4.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                self.Tr4.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(λ/#/#)
+            elif Pila_Valida.tope()=="#" and estado_actual=="q1" and bandera==len(palabra):
+                self.Tr3.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Aceptacion.jpg"))
+                estado_actual="q2"
+                self.Tr3.setStyleSheet("color: rgb(0, 0, 0);")
+                engine.say("palindrome")
+                engine.runAndWait()
+                self.label.setText("SI ES PALINDROME")
+                self.label.setStyleSheet("color: GREEN")
+                bandera=bandera+1
+            #(b/#/#b) 
+            elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
+                self.Tr5.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("#")
+                Pila_Valida.apilar("b")
+                self.Tr5.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(c/#/#)
+            elif Pila_Valida.tope()=="#" and caracter=="c" and estado_actual=="q0":
+                self.Tr12.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #b/b/bb
+            elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q0":
+                self.Tr9.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("b")
+                Pila_Valida.apilar("b")
+                engine.say("continúa en Estado inicial q0. leyendo una b")
+                engine.runAndWait()
+                QtTest.QTest.qWait(1500)
+                self.Tr9.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(c/a/a)
+            elif Pila_Valida.tope()=="a" and caracter=="c" and estado_actual=="q0":
+                self.Tr2.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
+                estado_actual="q1"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("a")
+                self.Tr2.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            #(a/b/ba)
+            elif Pila_Valida.tope()=="b" and caracter=="a" and estado_actual=="q0":
+                self.Tr7.setStyleSheet("color: rgb(11, 143, 38);")
+                self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
+                estado_actual="q0"
+                Pila_Valida.desapilar()
+                Pila_Valida.apilar("b")
+                Pila_Valida.apilar("a")
+                self.Tr7.setStyleSheet("color: rgb(0, 0, 0);")
+                bandera=bandera+1
+            else:
+                engine.say("No palindrome")
+                engine.runAndWait()
+                msg=QtWidgets.QMessageBox()
+                msg.setText("se quedó sin camino")
+                msg.setStyleSheet("color: red")
+                msg.show()
+                msg.exec()
+
+                break
+
+        if estado_actual != "q2":
+            self.label.setText("NO ES PALINDROME")
+            self.label.setStyleSheet("color: red")
+            msg=QtWidgets.QMessageBox()
+            msg.setText("debe ser de la forma: ZcZ^(-1), Z=(a*,b*)")
+            msg.show()
+            msg.setStyleSheet("color: red")
+            msg.exec() 
+            self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))  
             
-            #QtTest.QTest.qWait(15000)
+
             
             
 
