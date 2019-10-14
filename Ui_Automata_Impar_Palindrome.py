@@ -208,7 +208,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
                 Pila_Valida.desapilar()
-                engine.say("continúa en Estado inicial q1. leyendo una b")
+                engine.say("continúa en Estado q1. leyendo una b")
                 engine.runAndWait()
                 QtTest.QTest.qWait(1000)
                 self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
