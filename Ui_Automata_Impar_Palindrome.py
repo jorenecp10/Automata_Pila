@@ -133,6 +133,7 @@ class Ui_Automata_Impar_Palindrome(object):
         engine.setProperty('rate', rate-60)
         estado_actual="q0"
         bandera=1
+        self.label.setStyleSheet("color: green")
         self.listWidget.clear()
         mostrando_cadena_recorrida=""
         for caracter in palabra:
@@ -324,9 +325,11 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 
             else:
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+caracter
                 engine.say("Se quedó sin camino y no finalizó en un estado de aceptacion")
                 engine.runAndWait()
-                self.label.setText(caracter+caracter)
+                self.label.setText(mostrando_cadena_recorrida)
+                self.label.setStyleSheet("color: red;")
                 msg=QtWidgets.QMessageBox()
                 msg.setText("se quedó sin camino NO ES PALINDROME")
                 msg.setStyleSheet("color: red")
@@ -345,7 +348,7 @@ class Ui_Automata_Impar_Palindrome(object):
             msg.setStyleSheet("color: red")
             msg.show()
             msg.exec()
-            self.label.setVisible(False)
+            self.label.clear()
             self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
             Tamaño_list=Pila_Valida.tamano()
             self.listWidget.clear()
