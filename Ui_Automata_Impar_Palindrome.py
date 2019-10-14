@@ -15,6 +15,8 @@ import pyttsx3
 
 
 
+
+
 class Ui_Automata_Impar_Palindrome(object):
 
     
@@ -80,7 +82,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Palabra = QtWidgets.QLineEdit(self.Palindrome)
         self.Palabra.setGeometry(QtCore.QRect(60, 90, 391, 20))
         self.Palabra.setObjectName("Palabra")
-        self.Palabra.setDisabled(1)
+        #self.Palabra.setDisabled(1)
         self.Titulo_Palabra = QtWidgets.QLabel(self.Palindrome)
         self.Titulo_Palabra.setGeometry(QtCore.QRect(200, 70, 111, 16))
         self.Titulo_Palabra.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";")
@@ -132,10 +134,11 @@ class Ui_Automata_Impar_Palindrome(object):
         estado_actual="q0"
         bandera=1
         self.listWidget.clear()
-        
+        mostrando_cadena_recorrida=""
         for caracter in palabra:
             #(a/#/#a)
             if Pila_Valida.tope()=="#" and caracter=="a" and estado_actual=="q0":
+                mostrando_cadena_recorrida="a"
                 self.Tr10.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
                 estado_actual="q0"
@@ -147,8 +150,11 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000) 
                 self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
+                
             #(a/a/aa)   
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"a"
                 QtTest.QTest.qWait(1000)
                 self.Tr6.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
@@ -159,13 +165,15 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.say("continúa en Estado inicial q0. leyendo una a")
                 engine.runAndWait()
                 QtTest.QTest.qWait(1000)
+                self.label.setText(caracter+caracter)
                 self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
-                i=Pila_Valida.tamano()
+                self.label.setText(mostrando_cadena_recorrida)
                     
                 
             #(b/a/ab)
             elif Pila_Valida.tope()=="a" and caracter=="b" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
                 self.Tr8.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
                 estado_actual="q0"
@@ -177,9 +185,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000)
                 self.Tr8.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
-                
+                self.label.setText(mostrando_cadena_recorrida)
             #(c/b/b)
             elif Pila_Valida.tope()=="b" and caracter=="c" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"c"
                 self.Tr11.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
@@ -190,8 +199,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000)
                 self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #(b/b/λ)
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q1":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
                 QtTest.QTest.qWait(1000)
                 self.Tr1.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
@@ -202,8 +213,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000)
                 self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #(a/a/λ)
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q1":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"a"
                 QtTest.QTest.qWait(1000)
                 self.Tr4.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
@@ -214,8 +227,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000)
                 self.Tr4.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #(λ/#/#)
             elif Pila_Valida.tope()=="#" and estado_actual=="q1" and bandera==len(palabra):
+                #self.label.setText(mostrando_cadena_recorrida)
                 self.Tr3.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Aceptacion.jpg"))
                 estado_actual="q2"
@@ -227,8 +242,17 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setStyleSheet("color: GREEN")
                 bandera=bandera+1
                 self.listWidget.addItem("#")
+                #self.Palabra.setStyleSheet("background-color: rgb(207,232, 162);")
+                self.label.setVisible(True)
+                msg=QtWidgets.QMessageBox()
+                msg.setText("ES PALINDROME")
+                msg.setStyleSheet("color: green")
+                msg.show()
+                msg.exec()
+                self.label.setVisible(False)
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
                 self.Tr5.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
                 estado_actual="q0"
@@ -240,18 +264,22 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000) 
                 self.Tr5.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #(c/#/#)
             elif Pila_Valida.tope()=="#" and caracter=="c" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"c"
                 self.Tr12.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
                 engine.say("pasa al estado q1. leyendo una c")
                 engine.runAndWait()
                 QtTest.QTest.qWait(1000)
-                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+                self.Tr12.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #b/b/bb
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
                 QtTest.QTest.qWait(1000)
                 self.Tr9.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
@@ -259,11 +287,15 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("b")
                 Pila_Valida.apilar("b")
+                engine.say("continúa en Estado inicial q0. leyendo una b")
+                engine.runAndWait()
                 QtTest.QTest.qWait(1000)
                 self.Tr9.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #(c/a/a)
             elif Pila_Valida.tope()=="a" and caracter=="c" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"c"
                 self.Tr2.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
@@ -274,8 +306,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000)
                 self.Tr2.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
             #(a/b/ba)
             elif Pila_Valida.tope()=="b" and caracter=="a" and estado_actual=="q0":
+                mostrando_cadena_recorrida=mostrando_cadena_recorrida+"a"
                 self.Tr7.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen2_Automata.jpg"))
                 estado_actual="q0"
@@ -287,15 +321,18 @@ class Ui_Automata_Impar_Palindrome(object):
                 QtTest.QTest.qWait(1000)
                 self.Tr7.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
+                self.label.setText(mostrando_cadena_recorrida)
                 
             else:
                 engine.say("Se quedó sin camino y no finalizó en un estado de aceptacion")
                 engine.runAndWait()
+                self.label.setText(caracter+caracter)
                 msg=QtWidgets.QMessageBox()
-                msg.setText("se quedó sin camino")
+                msg.setText("se quedó sin camino NO ES PALINDROME")
                 msg.setStyleSheet("color: red")
                 msg.show()
                 msg.exec()
+                msg=QtWidgets.QMessageBox()
                 break
 
         if estado_actual != "q2":
@@ -308,6 +345,7 @@ class Ui_Automata_Impar_Palindrome(object):
             msg.setStyleSheet("color: red")
             msg.show()
             msg.exec()
+            self.label.setVisible(False)
             self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
             Tamaño_list=Pila_Valida.tamano()
             self.listWidget.clear()
@@ -388,11 +426,19 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Aceptacion.jpg"))
                 estado_actual="q2"
                 self.Tr3.setStyleSheet("color: rgb(0, 0, 0);")
+                #self.Palabra.setStyleSheet("background-color: rgb(207,232, 162);")
                 engine.say("palindrome")
                 engine.runAndWait()
                 self.label.setText("SI ES PALINDROME")
                 self.label.setStyleSheet("color: GREEN")
                 bandera=bandera+1
+                self.label.setVisible(True)
+                msg=QtWidgets.QMessageBox()
+                msg.setText("ES PALINDROME")
+                msg.setStyleSheet("color: green")
+                msg.show()
+                msg.exec()
+                self.label.setVisible(False)
                 
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
@@ -409,7 +455,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr12.setStyleSheet("color: rgb(11, 143, 38);")
                 self.Automata.setPixmap(QtGui.QPixmap("Imagen3_Automata.jpg"))
                 estado_actual="q1"
-                self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
+                self.Tr12.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
             #b/b/bb
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q0":
@@ -419,6 +465,9 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("b")
                 Pila_Valida.apilar("b")
+                engine.say("continúa en Estado inicial q0. leyendo una b")
+                engine.runAndWait()
+                QtTest.QTest.qWait(1500)
                 self.Tr9.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
             #(c/a/a)
@@ -444,10 +493,11 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.say("No palindrome")
                 engine.runAndWait()
                 msg=QtWidgets.QMessageBox()
-                msg.setText("se quedó sin camino")
+                msg.setText("se quedó sin camino NO ES PALINDROME")
                 msg.setStyleSheet("color: red")
                 msg.show()
                 msg.exec()
+                
 
                 break
 
@@ -459,13 +509,13 @@ class Ui_Automata_Impar_Palindrome(object):
             msg.show()
             msg.setStyleSheet("color: red")
             msg.exec() 
+            self.label.setVisible(False)
             self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))  
             Tamaño_list=Pila_Valida.tamano()
             self.listWidget.clear()
             for i in range(1,Tamaño_list+1):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
-            
-            
+    
 
 
         
