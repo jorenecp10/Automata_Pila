@@ -83,6 +83,9 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Palabra.setGeometry(QtCore.QRect(60, 90, 391, 20))
         self.Palabra.setObjectName("Palabra")
         #self.Palabra.setDisabled(1)
+        self.label_Pila= QtWidgets.QLabel(self.Palindrome)
+        self.label_Pila.setGeometry(QtCore.QRect(495, 0, 47, 13))
+        self.label_Pila.setObjectName("label")
         self.Titulo_Palabra = QtWidgets.QLabel(self.Palindrome)
         self.Titulo_Palabra.setGeometry(QtCore.QRect(200, 70, 111, 16))
         self.Titulo_Palabra.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";")
@@ -91,6 +94,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.listWidget.setGeometry(QtCore.QRect(500, 20, 31, 411))
         self.listWidget.setObjectName("listWidget")
         self.listWidget.addItem("#")
+        self.listWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.label = QtWidgets.QLabel(self.Palindrome)
         self.label.setGeometry(QtCore.QRect(110, 30, 291, 20))
         self.label.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";""color: rgb(11, 143, 38);")
@@ -123,6 +127,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Titulo_Palabra.setText(_translate("Automata_Impar_Palindrome", "PALABRA"))
         self.Verifica_Lento.clicked.connect(self.Simulador_Automata_lento)
         self.Verifica_rapido.clicked.connect(self.Simulador_Automata_rapido)
+        self.label_Pila.setText(_translate("Automata_Impar_Palindrome", "PILA"))
 
     def Simulador_Automata_lento(self):
         palabra=self.Palabra.text()+"#"
