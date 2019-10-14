@@ -106,7 +106,7 @@ class Ui_MainWindow(object):
         self.ui=Ui_Automata_Impar_Palindrome()
         self.ui.setupUi(self.ventana)
         self.ui.Palabra.setText(self.Cadena.text())
-        self.ui.label.setText(self.Cadena.text())
+        #self.ui.label.setText(self.Cadena.text())
         self.ventana.show()
         
 
