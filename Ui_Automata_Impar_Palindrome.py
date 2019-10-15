@@ -507,7 +507,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 estado_actual="q2"
                 self.Tr3.setStyleSheet("color: rgb(0, 0, 0);")
                 #self.Palabra.setStyleSheet("background-color: rgb(207,232, 162);")
-                self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_aceptada.jpg"))
+                self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_aceptada.png"))
                 engine.say("palindrome")
                 engine.runAndWait()
                 self.label.setText("SI ES PALINDROME")
@@ -572,6 +572,7 @@ class Ui_Automata_Impar_Palindrome(object):
             else:
                 engine.say("No palindrome")
                 engine.runAndWait()
+                self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_denegado.jpg"))
                 msg=QtWidgets.QMessageBox()
                 msg.setText("se quedó sin camino NO ES PALINDROME")
                 msg.setStyleSheet("color: red")
@@ -584,7 +585,6 @@ class Ui_Automata_Impar_Palindrome(object):
         if estado_actual != "q2":
             self.label.setText("NO ES PALINDROME")
             self.label.setStyleSheet("color: red")
-            self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_denegado.jpg"))
             msg=QtWidgets.QMessageBox()
             msg.setText("debe ser de la forma: ZcZ^(-1), Z=(a*,b*)")
             msg.show()
