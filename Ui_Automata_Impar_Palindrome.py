@@ -98,7 +98,6 @@ class Ui_Automata_Impar_Palindrome(object):
         self.label = QtWidgets.QLabel(self.Palindrome)
         self.label.setGeometry(QtCore.QRect(110, 30, 291, 20))
         self.label.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";""color: rgb(11, 143, 38);")
-        ##self.label.setStyleSheet("color:red;")
         Automata_Impar_Palindrome.setCentralWidget(self.Palindrome)
         self.statusbar = QtWidgets.QStatusBar(Automata_Impar_Palindrome)
         self.statusbar.setObjectName("statusbar")
@@ -130,6 +129,8 @@ class Ui_Automata_Impar_Palindrome(object):
         self.label_Pila.setText(_translate("Automata_Impar_Palindrome", "PILA"))
 
     def Simulador_Automata_lento(self):
+        self.Verifica_rapido.setEnabled(False)
+        self.Verifica_Lento.setEnabled(False)
         palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
@@ -255,7 +256,9 @@ class Ui_Automata_Impar_Palindrome(object):
                 msg.setStyleSheet("color: green")
                 msg.show()
                 msg.exec()
-                self.label.setVisible(False)
+                self.label.clear()
+                self.Verifica_rapido.setEnabled(True)
+                self.Verifica_Lento.setEnabled(True)
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
@@ -359,8 +362,12 @@ class Ui_Automata_Impar_Palindrome(object):
             self.listWidget.clear()
             for i in range(1,Tamaño_list+1):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+            self.Verifica_rapido.setEnabled(True)
+            self.Verifica_Lento.setEnabled(True)
             
     def Simulador_Automata_rapido(self):
+        self.Verifica_rapido.setEnabled(False)
+        self.Verifica_Lento.setEnabled(False)
         palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
@@ -447,6 +454,8 @@ class Ui_Automata_Impar_Palindrome(object):
                 msg.show()
                 msg.exec()
                 self.label.setVisible(False)
+                self.Verifica_rapido.setEnabled(True)
+                self.Verifica_Lento.setEnabled(True)
                 
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
@@ -523,6 +532,8 @@ class Ui_Automata_Impar_Palindrome(object):
             self.listWidget.clear()
             for i in range(1,Tamaño_list+1):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+            self.Verifica_rapido.setEnabled(True)
+            self.Verifica_Lento.setEnabled(True)    
     
 
 
