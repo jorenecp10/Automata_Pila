@@ -24,7 +24,7 @@ class Ui_Automata_Impar_Palindrome(object):
     def setupUi(self, Automata_Impar_Palindrome):
         Automata_Impar_Palindrome.setObjectName("Automata_Impar_Palindrome")
         #Automata_Impar_Palindrome.resize(700,500)
-        Automata_Impar_Palindrome.setFixedSize(700,400)
+        Automata_Impar_Palindrome.setFixedSize(700,395)
         Automata_Impar_Palindrome.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 255, 255);")
@@ -39,7 +39,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Verifica_rapido.setStyleSheet("background-color: rgb(106, 250, 154);")
         self.Verifica_rapido.setObjectName("Verifica_rapido")
         self.Automata = QtWidgets.QLabel(self.Palindrome)
-        self.Automata.setGeometry(QtCore.QRect(30, 150, 421, 91))
+        self.Automata.setGeometry(QtCore.QRect(30, 150, 412, 91))
         self.Automata.setText("")
         self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
         self.Automata.setScaledContents(True)
@@ -92,7 +92,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.label_Pila.setGeometry(QtCore.QRect(495, 0, 47, 13))
         self.label_Pila.setObjectName("label")
         self.imagen_robot = QtWidgets.QLabel(self.Palindrome)
-        self.imagen_robot.setGeometry(QtCore.QRect(540, 20, 141, 301))
+        self.imagen_robot.setGeometry(QtCore.QRect(540, 20, 141, 370))
         self.imagen_robot.setText("")
         self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen.png"))
         self.imagen_robot.setScaledContents(True)
