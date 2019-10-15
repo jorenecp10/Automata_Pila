@@ -530,9 +530,6 @@ class Ui_Automata_Impar_Palindrome(object):
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("b")
                 Pila_Valida.apilar("b")
-                engine.say("continúa en Estado inicial q0. leyendo una b")
-                engine.runAndWait()
-                QtTest.QTest.qWait(1500)
                 self.Tr9.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
             #(c/a/a)
