@@ -158,6 +158,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
                 
             #(a/a/aa)   
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
@@ -176,6 +180,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr6.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
                     
                 
             #(b/a/ab)
@@ -193,6 +201,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr8.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(c/b/b)
             elif Pila_Valida.tope()=="b" and caracter=="c" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"c"
@@ -207,6 +219,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr11.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(b/b/λ)
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q1":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
@@ -221,6 +237,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr1.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(a/a/λ)
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q1":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"a"
@@ -235,6 +255,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr4.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(λ/#/#)
             elif Pila_Valida.tope()=="#" and estado_actual=="q1" and bandera==len(palabra):
                 #self.label.setText(mostrando_cadena_recorrida)
@@ -259,6 +283,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.clear()
                 self.Verifica_rapido.setEnabled(True)
                 self.Verifica_Lento.setEnabled(True)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
@@ -274,6 +302,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr5.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(c/#/#)
             elif Pila_Valida.tope()=="#" and caracter=="c" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"c"
@@ -286,6 +318,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr12.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #b/b/bb
             elif Pila_Valida.tope()=="b" and caracter=="b" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
@@ -302,6 +338,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr9.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(c/a/a)
             elif Pila_Valida.tope()=="a" and caracter=="c" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"c"
@@ -316,6 +356,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr2.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(a/b/ba)
             elif Pila_Valida.tope()=="b" and caracter=="a" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"a"
@@ -331,6 +375,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.Tr7.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
                 self.label.setText(mostrando_cadena_recorrida)
+                Tamaño_list=Pila_Valida.tamano()
+                self.listWidget.clear()
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
                 
             else:
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+caracter
