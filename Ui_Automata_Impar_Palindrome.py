@@ -23,7 +23,8 @@ class Ui_Automata_Impar_Palindrome(object):
 
     def setupUi(self, Automata_Impar_Palindrome):
         Automata_Impar_Palindrome.setObjectName("Automata_Impar_Palindrome")
-        Automata_Impar_Palindrome.resize(700,500)
+        #Automata_Impar_Palindrome.resize(700,500)
+        Automata_Impar_Palindrome.setFixedSize(700,400)
         Automata_Impar_Palindrome.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 255, 255);")
@@ -43,6 +44,10 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
         self.Automata.setScaledContents(True)
         self.Automata.setObjectName("Automata")
+        self.autor = QtWidgets.QLabel(self.Palindrome)
+        self.autor.setGeometry(QtCore.QRect(30, 360, 101, 16))
+        self.autor.setStyleSheet("font: 75 11pt \"Bahnschrift Light Condensed\";\n"
+"background-color: rgb(175, 255, 207);")
         self.Tr5 = QtWidgets.QLabel(self.Palindrome)
         self.Tr5.setGeometry(QtCore.QRect(10, 140, 47, 13))
         self.Tr5.setObjectName("Tr5")
@@ -86,6 +91,12 @@ class Ui_Automata_Impar_Palindrome(object):
         self.label_Pila= QtWidgets.QLabel(self.Palindrome)
         self.label_Pila.setGeometry(QtCore.QRect(495, 0, 47, 13))
         self.label_Pila.setObjectName("label")
+        self.imagen_robot = QtWidgets.QLabel(self.Palindrome)
+        self.imagen_robot.setGeometry(QtCore.QRect(540, 20, 141, 301))
+        self.imagen_robot.setText("")
+        self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen.png"))
+        self.imagen_robot.setScaledContents(True)
+        self.imagen_robot.setObjectName("imagen_robot")
         self.Titulo_Palabra = QtWidgets.QLabel(self.Palindrome)
         self.Titulo_Palabra.setGeometry(QtCore.QRect(200, 70, 111, 16))
         self.Titulo_Palabra.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";")
@@ -127,10 +138,12 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Verifica_Lento.clicked.connect(self.Simulador_Automata_lento)
         self.Verifica_rapido.clicked.connect(self.Simulador_Automata_rapido)
         self.label_Pila.setText(_translate("Automata_Impar_Palindrome", "PILA"))
+        self.autor.setText(_translate("MainWindow", "by JOSE CORREA"))
 
     def Simulador_Automata_lento(self):
         self.Verifica_rapido.setEnabled(False)
         self.Verifica_Lento.setEnabled(False)
+        self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen.png"))
         palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
@@ -272,6 +285,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText("SI ES PALINDROME")
                 self.label.setStyleSheet("color: GREEN")
                 bandera=bandera+1
+                self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_aceptada.png"))
                 self.listWidget.addItem("#")
                 #self.Palabra.setStyleSheet("background-color: rgb(207,232, 162);")
                 self.label.setVisible(True)
@@ -287,6 +301,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.listWidget.clear()
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+                
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
                 mostrando_cadena_recorrida=mostrando_cadena_recorrida+"b"
@@ -386,6 +401,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.runAndWait()
                 self.label.setText(mostrando_cadena_recorrida)
                 self.label.setStyleSheet("color: red;")
+                self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_denegado.jpg"))
                 msg=QtWidgets.QMessageBox()
                 msg.setText("se quedó sin camino NO ES PALINDROME")
                 msg.setStyleSheet("color: red")
@@ -416,6 +432,7 @@ class Ui_Automata_Impar_Palindrome(object):
     def Simulador_Automata_rapido(self):
         self.Verifica_rapido.setEnabled(False)
         self.Verifica_Lento.setEnabled(False)
+        self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen.png"))
         palabra=self.Palabra.text()+"#"
         Pila_Valida=Pila()
         Pila_Valida.apilar("#")
@@ -490,6 +507,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 estado_actual="q2"
                 self.Tr3.setStyleSheet("color: rgb(0, 0, 0);")
                 #self.Palabra.setStyleSheet("background-color: rgb(207,232, 162);")
+                self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_aceptada.jpg"))
                 engine.say("palindrome")
                 engine.runAndWait()
                 self.label.setText("SI ES PALINDROME")
@@ -566,6 +584,7 @@ class Ui_Automata_Impar_Palindrome(object):
         if estado_actual != "q2":
             self.label.setText("NO ES PALINDROME")
             self.label.setStyleSheet("color: red")
+            self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_denegado.jpg"))
             msg=QtWidgets.QMessageBox()
             msg.setText("debe ser de la forma: ZcZ^(-1), Z=(a*,b*)")
             msg.show()

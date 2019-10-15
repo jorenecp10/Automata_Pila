@@ -15,7 +15,8 @@ from Ui_Automata_Impar_Palindrome import Ui_Automata_Impar_Palindrome
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(401, 285)
+        #MainWindow.resize(401, 285)
+        MainWindow.setFixedSize(401,285)
         MainWindow.setStyleSheet("background-color: rgb(181, 181, 181);\n"
 "border-color: rgb(98, 98, 98);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
