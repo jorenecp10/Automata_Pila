@@ -107,8 +107,8 @@ class Ui_Automata_Impar_Palindrome(object):
         self.listWidget.addItem("#")
         self.listWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.label = QtWidgets.QLabel(self.Palindrome)
-        self.label.setGeometry(QtCore.QRect(110, 30, 291, 20))
-        self.label.setStyleSheet("font: 75 12pt \"MS Shell Dlg 2\";""color: rgb(11, 143, 38);")
+        self.label.setGeometry(QtCore.QRect(70, 20, 481, 21))
+        self.label.setStyleSheet("font: 75 20pt \"MS Shell Dlg 2\";")
         Automata_Impar_Palindrome.setCentralWidget(self.Palindrome)
         self.statusbar = QtWidgets.QStatusBar(Automata_Impar_Palindrome)
         self.statusbar.setObjectName("statusbar")
@@ -152,7 +152,7 @@ class Ui_Automata_Impar_Palindrome(object):
         engine.setProperty('rate', rate-60)
         estado_actual="q0"
         bandera=1
-        self.label.setStyleSheet("color: green")
+        self.label.setStyleSheet("font: 75 20pt \"MS Shell Dlg 2\";""color: green")
         self.listWidget.clear()
         mostrando_cadena_recorrida=""
         for caracter in palabra:
@@ -283,7 +283,6 @@ class Ui_Automata_Impar_Palindrome(object):
                 engine.say("pasa al Estado De aceptacion leyendo vacío. La palabra es palindrome")
                 engine.runAndWait()
                 self.label.setText("SI ES PALINDROME")
-                self.label.setStyleSheet("color: GREEN")
                 bandera=bandera+1
                 self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen_aceptada.png"))
                 self.listWidget.addItem("#")
