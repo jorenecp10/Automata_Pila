@@ -141,6 +141,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.autor.setText(_translate("MainWindow", "by JOSE CORREA"))
 
     def Simulador_Automata_lento(self):
+        self.Palabra.setEnabled(False)
         self.Verifica_rapido.setEnabled(False)
         self.Verifica_Lento.setEnabled(False)
         self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen.png"))
@@ -300,6 +301,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.listWidget.clear()
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+                self.Palabra.setEnabled(True)
                 
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
@@ -427,8 +429,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             self.Verifica_rapido.setEnabled(True)
             self.Verifica_Lento.setEnabled(True)
+            self.Palabra.setEnabled(True)
             
     def Simulador_Automata_rapido(self):
+        self.Palabra.setEnabled(False)
         self.Verifica_rapido.setEnabled(False)
         self.Verifica_Lento.setEnabled(False)
         self.imagen_robot.setPixmap(QtGui.QPixmap("automata_imagen.png"))
@@ -521,6 +525,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setVisible(False)
                 self.Verifica_rapido.setEnabled(True)
                 self.Verifica_Lento.setEnabled(True)
+                self.Palabra.setEnabled(True)
                 
             #(b/#/#b) 
             elif Pila_Valida.tope()=="#" and caracter=="b" and estado_actual=="q0":
@@ -596,7 +601,8 @@ class Ui_Automata_Impar_Palindrome(object):
             for i in range(1,Tamaño_list+1):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             self.Verifica_rapido.setEnabled(True)
-            self.Verifica_Lento.setEnabled(True)    
+            self.Verifica_Lento.setEnabled(True)  
+            self.Palabra.setEnabled(True)  
     
 
 
