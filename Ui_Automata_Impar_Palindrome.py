@@ -157,7 +157,6 @@ class Ui_Automata_Impar_Palindrome(object):
         estado_actual="q0"
         bandera=1
         self.label.setStyleSheet("font: 75 20pt \"MS Shell Dlg 2\";""color: green")
-        self.listWidget.clear()
         
         mostrando_cadena_recorrida=""
         for caracter in palabra:
@@ -440,14 +439,19 @@ class Ui_Automata_Impar_Palindrome(object):
             self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
             Tamaño_list=Pila_Valida.tamano()
             self.listWidget.clear()
-            self.listWidget.addItem(caracter)
-            for i in range(1,Tamaño_list+1):
-                self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+            if caracter != "c":
+                self.listWidget.addItem(caracter)
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+            else:
+                for i in range(1,Tamaño_list+1):
+                    self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             self.Verifica_rapido.setEnabled(True)
             self.Verifica_Lento.setEnabled(True)
             self.Palabra.setEnabled(True)
             
     def Simulador_Automata_rapido(self):
+        self.listWidget.clear()
         self.Palabra.setEnabled(False)
         self.Verifica_rapido.setEnabled(False)
         self.Verifica_Lento.setEnabled(False)
@@ -460,7 +464,6 @@ class Ui_Automata_Impar_Palindrome(object):
         engine.setProperty('rate', rate-60)
         estado_actual="q0"
         bandera=1
-        self.listWidget.clear()
         for caracter in palabra:
             #(a/#/#a)
             if Pila_Valida.tope()=="#" and caracter=="a" and estado_actual=="q0":
@@ -469,7 +472,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 estado_actual="q0"
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("#")
-                Pila_Valida.apilar(caracter)
+                Pila_Valida.apilar("a")
                 self.Tr10.setStyleSheet("color: rgb(0, 0, 0);")
                 bandera=bandera+1
             #(a/a/aa)   
@@ -616,9 +619,10 @@ class Ui_Automata_Impar_Palindrome(object):
             self.listWidget.clear()
             for i in range(1,Tamaño_list+1):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+            
             self.Verifica_rapido.setEnabled(True)
-            self.Verifica_Lento.setEnabled(True)  
-            self.Palabra.setEnabled(True)  
+            self.Verifica_Lento.setEnabled(True)
+            self.Palabra.setEnabled(True)
     
 
 
