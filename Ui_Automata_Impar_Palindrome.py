@@ -89,7 +89,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Palabra.setObjectName("Palabra")
         #self.Palabra.setDisabled(1)
         self.label_Pila= QtWidgets.QLabel(self.Palindrome)
-        self.label_Pila.setGeometry(QtCore.QRect(495, 0, 47, 13))
+        self.label_Pila.setGeometry(QtCore.QRect(504, 8, 47, 13))
         self.label_Pila.setObjectName("label")
         self.imagen_robot = QtWidgets.QLabel(self.Palindrome)
         self.imagen_robot.setGeometry(QtCore.QRect(540, 20, 141, 370))
@@ -113,6 +113,7 @@ class Ui_Automata_Impar_Palindrome(object):
         self.statusbar = QtWidgets.QStatusBar(Automata_Impar_Palindrome)
         self.statusbar.setObjectName("statusbar")
         Automata_Impar_Palindrome.setStatusBar(self.statusbar)
+        self.listWidget.setStyleSheet("background-color: rgb(175, 255, 207);")
 
         self.retranslateUi(Automata_Impar_Palindrome)
         QtCore.QMetaObject.connectSlotsByName(Automata_Impar_Palindrome)
@@ -139,8 +140,10 @@ class Ui_Automata_Impar_Palindrome(object):
         self.Verifica_rapido.clicked.connect(self.Simulador_Automata_rapido)
         self.label_Pila.setText(_translate("Automata_Impar_Palindrome", "PILA"))
         self.autor.setText(_translate("MainWindow", "by JOSE CORREA"))
+        self.listWidget.addItem("#")
 
     def Simulador_Automata_lento(self):
+        self.label.clear()
         self.Palabra.setEnabled(False)
         self.Verifica_rapido.setEnabled(False)
         self.Verifica_Lento.setEnabled(False)
@@ -155,6 +158,7 @@ class Ui_Automata_Impar_Palindrome(object):
         bandera=1
         self.label.setStyleSheet("font: 75 20pt \"MS Shell Dlg 2\";""color: green")
         self.listWidget.clear()
+        
         mostrando_cadena_recorrida=""
         for caracter in palabra:
             #(a/#/#a)
@@ -165,7 +169,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 estado_actual="q0"
                 Pila_Valida.desapilar()
                 Pila_Valida.apilar("#")
-                Pila_Valida.apilar(caracter)
+                Pila_Valida.apilar("a")
                 engine.say("Estado inicial q0. leyendo una a")
                 engine.runAndWait()
                 QtTest.QTest.qWait(1000) 
@@ -174,8 +178,10 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
+                  
                 
             #(a/a/aa)   
             elif Pila_Valida.tope()=="a" and caracter=="a" and estado_actual=="q0":
@@ -196,6 +202,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
                     
@@ -217,6 +224,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(c/b/b)
@@ -235,6 +243,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem("b")
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(b/b/λ)
@@ -253,6 +262,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(a/a/λ)
@@ -271,6 +281,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(λ/#/#)
@@ -320,6 +331,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(c/#/#)
@@ -356,6 +368,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(c/a/a)
@@ -374,6 +387,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem("a")
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             #(a/b/ba)
@@ -393,6 +407,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 self.label.setText(mostrando_cadena_recorrida)
                 Tamaño_list=Pila_Valida.tamano()
                 self.listWidget.clear()
+                self.listWidget.addItem(caracter)
                 for i in range(1,Tamaño_list+1):
                     self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
                 
@@ -425,6 +440,7 @@ class Ui_Automata_Impar_Palindrome(object):
             self.Automata.setPixmap(QtGui.QPixmap("Imagen1_Automata.jpg"))
             Tamaño_list=Pila_Valida.tamano()
             self.listWidget.clear()
+            self.listWidget.addItem(caracter)
             for i in range(1,Tamaño_list+1):
                 self.listWidget.addItem(Pila_Valida.mostrar()[Tamaño_list-i])
             self.Verifica_rapido.setEnabled(True)
@@ -522,7 +538,7 @@ class Ui_Automata_Impar_Palindrome(object):
                 msg.setStyleSheet("color: green")
                 msg.show()
                 msg.exec()
-                self.label.setVisible(False)
+                self.label.setVisible(True)
                 self.Verifica_rapido.setEnabled(True)
                 self.Verifica_Lento.setEnabled(True)
                 self.Palabra.setEnabled(True)
